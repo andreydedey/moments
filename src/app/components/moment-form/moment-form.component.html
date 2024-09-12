@@ -8,14 +8,14 @@
     </div>
     <div class="form-group">
         <label for="description">Description</label>
-        <textarea placeholder="O que aconteceu em seu momento ?" required></textarea>
+        <textarea placeholder="O que aconteceu em seu momento ?" formControlName="description"></textarea>
         <div *ngIf="description.invalid && formDir.submitted" class="validation-error">
-            <p *ngIf="description.errors?.['required']">A descrição é obrigatória</p>
+            <p *ngIf="description.errors?.['required']" >A descrição é obrigatória</p>
         </div>
     </div>
     <div class="form-group">
         <label for="image">Coloque a foto que mais marcou seu momento:</label>
-        <input type="file">
+        <input type="file" (change)="onFileSelected($event)">
     </div>
     <input type="submit" value="{{ btnText }}">
 </form>
