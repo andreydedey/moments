@@ -2,8 +2,8 @@ export interface Moment {
     id?: number,
     title: string,
     description: string,
-    image: string,
-    createt_at?: string,
-    update_at?: string,
+    image?: string,
+    created_at?: Date,
+    update_at?: Date,
     coments?: [{text:string, username: string}];
 }

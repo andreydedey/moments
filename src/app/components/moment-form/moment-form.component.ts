@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Moment } from '../../interfaces/Moment';
 
 
 @Component({
@@ -11,6 +12,7 @@ import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angula
   styleUrl: './moment-form.component.css'
 })
 export class MomentFormComponent implements OnInit {
+  @Output() onSubmit = new EventEmitter<Moment>();
   @Input() btnText!: string;
 
   momentForm!: FormGroup;
@@ -39,8 +41,12 @@ export class MomentFormComponent implements OnInit {
   }
 
   submit() {
-    if (this.momentForm.invalid)
+    if (this.momentForm.invalid) {
+      return;
+    }
 
+    this.onSubmit.emit(this.momentForm.value);
+    
     console.log(this.momentForm.value);
   }
 }
