@@ -38,4 +38,10 @@ export class MomentService {
   getMoments(): Array<Moment> {
     return this.MomentMock;
   }
+
+  removeMoment(id: number): void {
+    this.MomentMock = this.MomentMock.filter((moment) => {
+      id === moment.id;
+    })
+  }
 }

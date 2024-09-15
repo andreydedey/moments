@@ -5,6 +5,7 @@ import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { faTimes, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MessagesService } from '../../../services/messageService/messages.service';
 
 @Component({
   selector: 'app-moment',
@@ -19,10 +20,18 @@ export class MomentComponent implements OnInit {
   faTimes = faTimes;
   faEdit = faEdit;
 
-  constructor (private momentService: MomentService, private route: ActivatedRoute) {}
+  constructor ( private router: Router, private route: ActivatedRoute, private momentService: MomentService, private messagesServices: MessagesService) {}
 
   ngOnInit(): void {
       const id = Number(this.route.snapshot.paramMap.get('id'));
       this.moment = this.momentService.getMoment(id);
+  }
+
+  removeHandler(id: number) {
+    this.momentService.removeMoment(id);
+
+    this.messagesServices.add("Momento excluído com sucesso!");
+
+    this.router.navigate(['/']);
   }
 }
