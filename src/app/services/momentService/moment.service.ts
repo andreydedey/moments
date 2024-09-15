@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Moment } from '../../interfaces/Moment';
 import dayjs from 'dayjs'
+import { Title } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
@@ -43,5 +44,28 @@ export class MomentService {
     this.MomentMock = this.MomentMock.filter((moment) => {
       id === moment.id;
     })
+  }
+
+  updateMoment(id: number, formData: FormData): void {
+    const index = this.MomentMock.findIndex(moment => moment.id === id);
+  
+    // Obter valores do FormData e garantir que são strings
+    const title = formData.get('title');
+    const description = formData.get('description');
+    const image = formData.get('image');
+  
+    if (index !== -1) {
+      if (typeof title === 'string') {
+        this.MomentMock[index].title = title;
+      }
+      if (typeof description === 'string') {
+        this.MomentMock[index].description = description;
+      }
+      if (typeof image === 'string') {
+        this.MomentMock[index].image = image;
+      }
+    } else {
+      console.error('Moment not found for ID:', id);
+    }
   }
 }
