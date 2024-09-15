@@ -4,21 +4,21 @@
      <div class="search-container">
       <form>
          <fa-icon [icon]="fasearch"></fa-icon>
-         <input type="text" placeholder="Ou busque por um momenot..." (input)="search($event)">
+         <input type="text" placeholder="Ou busque por um momento..." (input)="search($event)">
       </form>
      </div>
      <div *ngIf="moments.length > 0; else noMoments">
         <div class="moments-container">
            <div class="moment" *ngFor="let moment of moments" @fade>
-               <img src="{{ moment.image }}" alt="momentimage">
-              <h3>{{ moment.title }}</h3>
-              <p class="date"> Em {{ moment.created_at | date: 'dd/MM/yyyy'}}</p>
-              <p>Comentários: {{moment.coments?.length || 0}}</p>
-              <p><a [routerLink]="['/moments', moment.id]"></a></p>
+               <img src="{{ moment.image }}" alt="moment image">
+               <h3>{{ moment.title }}</h3>
+               <p class="date"> Em {{ moment.created_at | date: 'dd/MM/yyyy'}}</p>
+               <p>Comentários: {{moment.coments?.length || 0}}</p>
+               <p><a [routerLink]="['/moments', moment.id]">Detalhes</a></p>
            </div>
         </div>
      </div>
-     <ng-template #noMoments>
-      <h1>Não há momentos cadastrados!</h1>
-     </ng-template>
+      <ng-template #noMoments>
+         <h1>Não há momentos cadastrados!</h1>
+      </ng-template>
 </div>

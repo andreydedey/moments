@@ -30,7 +30,12 @@ export class MomentService {
     this.MomentMock.push(newMoment);
   }
 
-  getMoment(): Array<Moment> {
+  getMoment(id: number): Moment {
+    const moment = this.MomentMock.find((moment) => moment.id === id);
+    return moment!; 
+  }
+
+  getMoments(): Array<Moment> {
     return this.MomentMock;
   }
 }

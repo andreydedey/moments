@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
   constructor(private momentService: MomentService) {}
 
   ngOnInit(): void {
-      const moments = this.momentService.getMoment();
+      const moments = this.momentService.getMoments();
       this.allMoments = moments;
       this.moments = moments;
       
