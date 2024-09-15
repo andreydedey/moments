@@ -8,6 +8,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MessagesService } from '../../../services/messageService/messages.service';
 import { Comment } from '../../../interfaces/Coment';
 import { FormGroup, FormControl, Validators, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
+import { ComentService } from '../../../services/comentService/coment.service';
 
 @Component({
   selector: 'app-moment',
@@ -18,30 +19,33 @@ import { FormGroup, FormControl, Validators, FormGroupDirective, ReactiveFormsMo
 })
 export class MomentComponent implements OnInit {
   moment?: Moment;
+  comments?: Array<Comment> = [];
 
   faTimes = faTimes;
   faEdit = faEdit;
 
   commentForm!: FormGroup;
 
-  constructor ( private router: Router, private route: ActivatedRoute, private momentService: MomentService, private messagesServices: MessagesService) {}
+  constructor ( private router: Router, private route: ActivatedRoute, private momentService: MomentService, private messagesServices: MessagesService, private commentService: ComentService) {}
 
   ngOnInit(): void {
       const id = Number(this.route.snapshot.paramMap.get('id'));
       this.moment = this.momentService.getMoment(id);
 
+      this.comments = this.commentService.getComments(this.moment);
+
       this.commentForm = new FormGroup({
-        text: new FormControl("", [Validators.required]),
+        text: new FormControl('', [Validators.required]),
         username: new FormControl('', [Validators.required])
-      })
+      });
   }
 
   get text() {
-    return this.commentForm.get('text')!
+    return this.commentForm.get('text')!;
   }
 
   get username() {
-    return this.commentForm.get('username')!
+    return this.commentForm.get('username')!;
   }
 
   removeHandler(id: number) {
@@ -52,8 +56,8 @@ export class MomentComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  onSubmit(formDirective: FormGroupDirective) {
-
+  onSubmit(formDirective: FormGroupDirective): void {
+    console.log('a função está funcionando');
   }
 
 }

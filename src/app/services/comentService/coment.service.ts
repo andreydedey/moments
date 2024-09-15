@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Comment } from '../../interfaces/Coment';
 import dayjs from 'dayjs';
+import { Moment } from '../../interfaces/Moment';
 
 
 @Injectable({
@@ -20,5 +21,12 @@ export class ComentService {
 
   createComment(data: Comment) {
     
+  }
+
+  getComments(moment: Moment): Array<Comment> {
+    const moment_id = moment.id;
+
+    const comments = this.CommentMock.filter(comment => comment.momentId === moment_id);
+    return comments;
   }
 }
