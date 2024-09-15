@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Moment } from '../../interfaces/Moment';
+import dayjs from 'dayjs'
 
 @Injectable({
   providedIn: 'root'
 })
 export class MomentService {
-    private MomentMock: Array<Moment> = [];
+    private MomentMock: Array<Moment> = [
+      {id: 1, title: 'praia', description: 'um dia legal na praia', created_at: dayjs().toDate(), update_at: dayjs().toDate()},
+      {id: 2, title: 'sol', description: 'um dia de sol', created_at: dayjs().toDate(), update_at: dayjs().toDate()}
+    ];
     private id: number = 0;
 
   constructor() {}
@@ -20,6 +24,11 @@ export class MomentService {
       update_at: new Date(),
     };
 
+    this.id += 1;
     this.MomentMock.push(newMoment);
+  }
+
+  getMoment(): Array<Moment> {
+    return this.MomentMock;
   }
 }
