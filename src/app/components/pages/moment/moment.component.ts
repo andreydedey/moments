@@ -57,7 +57,21 @@ export class MomentComponent implements OnInit {
   }
 
   onSubmit(formDirective: FormGroupDirective): void {
-    console.log('a função está funcionando');
+    if (this.commentForm.invalid){
+      return;
+    }
+
+    const data: Comment = this.commentForm.value;
+
+    data.momentId = Number(this.moment!.id);
+
+    this.commentService.createComment(data);
+    this.comments = this.commentService.getComments(this.moment!);
+
+    this.messagesServices.add("Comentário adicionado!");
+    // Resetar o Form
+    this.commentForm.reset();
+    formDirective.resetForm();
   }
 
 }

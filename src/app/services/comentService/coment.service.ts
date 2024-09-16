@@ -20,7 +20,11 @@ export class ComentService {
   constructor() {}
 
   createComment(data: Comment) {
-    
+    this.CommentMock.push(data);
+  }
+
+  getAllComments(): Array<Comment> {
+    return this.CommentMock;
   }
 
   getComments(moment: Moment): Array<Comment> {
